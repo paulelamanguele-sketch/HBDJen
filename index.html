@@ -17,42 +17,42 @@
     
     <div class="container">
         <h1>Happy Birthday Jennifer💗</h1>
-        <div class="greeting"></div>
-        <button class="shuffle-button">Click to Enter Our World 💕</button>
-        <div class="reason-counter"></div>
+        <p style="font-size: 1.5rem; color: #666; margin: 2rem 0;">Hey You Know What! You're the most</p>
+        <button class="shuffle-button" style="margin-top: 2rem;">Click to Enter Our World 💕</button>
     </div>
 
-    <script src="cause.js"></script>
-    
     <script>
-        // Initialize first reason on page load
-        const shuffleButton = document.querySelector('.shuffle-button');
-        shuffleButton.textContent = 'Click Here... 💕';
-        
+        // Create floating elements function
+        function createFloatingElement() {
+            const elements = ['🌸', '✨', '💖', '🦋', '⭐'];
+            const element = document.createElement('div');
+            element.className = 'floating';
+            element.textContent = elements[Math.floor(Math.random() * elements.length)];
+            element.style.left = Math.random() * window.innerWidth + 'px';
+            element.style.top = Math.random() * window.innerHeight + 'px';
+            element.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            document.body.appendChild(element);
+
+            gsap.to(element, {
+                y: -500,
+                duration: Math.random() * 10 + 10,
+                opacity: 0,
+                onComplete: () => element.remove()
+            });
+        }
+
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, {
+                x: e.clientX - 15,
+                y: e.clientY - 15,
+                duration: 0.2
+            });
+        });
+
         // Handle button click to navigate to cause.html
-        const reasons = [
-            { 
-                text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you. 💖", 
-                emoji: "🌟",
-                gif: "gif1.gif"
-            },
-            { 
-                text: "May your day be filled with love, laughter, and endless joy. 🌸 ", 
-                emoji: "💗",
-                gif: "gif2.gif"
-            },
-            { 
-                text: "Wishing you success, happiness, and everything your heart desires. ✨ ", 
-                emoji: "💕",
-                gif: "gif1.gif"
-            },
-            { 
-                text: "Stay the amazing girl you are—always spreading positivity around. Have the happiest year ahead! 🥳 ", 
-                emoji: "🌟",
-                gif: "gif2.gif"
-            }
-        ];
-        
+        const shuffleButton = document.querySelector('.shuffle-button');
         shuffleButton.addEventListener('click', () => {
             gsap.to(shuffleButton, {
                 scale: 0.9,
